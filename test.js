@@ -19,24 +19,42 @@ function toggleCounter() {
     }
 }
 function startCounting() {
-
     var startTime = Date.now();
-
     interval = setInterval(function () {
         elapsedTime = Date.now() - startTime;
         document.getElementById("timer").innerHTML = elapsedTime;
     });
 }
 
+
+function validate() {
+    name = document.getElementById('fname').value;
+    mod = document.getElementById('mod').value;
+    if (!name || !mod) {
+        //alert("Please Enter Fields");
+        //window.location.reload();
+        return false
+    }
+    return true
+}
+
+function generate() {
+    if (validate()) {
+        clearInterval(interval);
+        generateNumber();
+    }
+    else {
+        alert("Please Enter Fields");
+        window.location.reload();
+    }
+}
+
 function generateNumber() {
     document.getElementById('after').style.display = 'block';
     seed = elapsedTime;
-    // alert("seed: " + seed);
     mod = document.getElementById('mod').value;
-    // alert("mod: " + mod);
     number = createRand(elapsedTime);
-    document.getElementById("result").innerHTML = "<h1> Generated number is: " + number + "</h1><hr><br> ";
-
+    document.getElementById("result").innerHTML = "<h1> Generated number is: " + "<b style='color:red'>" + number + "</b>" + "</h1></br><hr>";
 }
 
 function createRand(seed) {
@@ -48,18 +66,11 @@ function createRand(seed) {
     return result;
 }
 
-function validate() {
-    name = document.getElementById('fname').value;
-    mod = document.getElementById('mod').value;
-    if (!name || !mod) {
-        alert("Please Enter Fields");
-        window.location.reload();
-    }
-}
+
 function explain(seed, a, c, mod, result) {
     document.getElementById("seed").innerHTML = "Seed is : " + seed;
     document.getElementById("a").innerHTML = "a is : " + a;
     document.getElementById("c").innerHTML = "c is : " + c;
     document.getElementById("modulus").innerHTML = "modulus is : " + mod;
-    document.getElementById("denklem").innerHTML = "result is = " + "(" + a + " * " + seed + " + " + c + ")" + " % " + mod + " = " + "<b>" + result + "</b>";
+    document.getElementById("denklem").innerHTML = "Result = " + "(" + a + " * " + seed + " + " + c + ")" + " % " + mod + " = " + "<b style='color:red'>" + result + "</b>" + "<hr>";
 }

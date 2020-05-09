@@ -6,35 +6,35 @@
 </head>
 
 <body>
-    <label for="fname"><b>First name:</b></label><br>
-    <input onclick="startCounting();" type="text" id="fname" name="fname" autocomplete="off"><br><br>
+    <div class="content">
+        <label for="fname"><b>First name:</b></label><br>
+        <input onclick="startCounting();" type="text" id="fname" name="fname" autocomplete="off"><br><br>
 
-    <label for="number"><b>Generate a number lower than: </b></label><br>
-    <input type="number" id="mod" name="mod" autocomplete="off"><br><br>
-    <input onchange="toggleCounter();" type="checkbox" id="chkCounter" name="chkCounter" value="chkCounter">
-    <label for="chkCounter"> Open the counter &nbsp;&nbsp;&nbsp; </label>
+        <label for="number"><b>Generate a number lower than: </b></label><br>
+        <input type="number" id="mod" name="mod" autocomplete="off"><br><br>
+        <input onchange="toggleCounter();" type="checkbox" id="chkCounter" name="chkCounter" value="chkCounter">
+        <label for="chkCounter"> Toggle seed &nbsp;&nbsp;&nbsp; </label><br>
+        <span hidden id="timer">0</span><br>
+        <input class="generate" onclick="generate();" type="button" value="Generate">
 
-    <span hidden id="timer">0</span><br>
-    <input class="generate" onclick="validate(); clearInterval(interval); generateNumber();" type="button"
-        value="Generate">
-
-    <div hidden id="after">
-        <br>
-        <p id="result"></p>
-        <button class="toggleExplain" onclick="toggleExplain();">Explain</button>
-        <div hidden id="explainToggle">
-            <div style=" background-color: rgb(213, 216, 218);">
-
-                <h2><u>Explaination:</u><br></h2>
-                <p id="seed"></p>
-                <p id="a"></p>
-                <p id="c"></p>
-                <p id="modulus"></p>
-                <p id="denklem"></p>
+        <div hidden id="after">
+            <br>
+            <p id="result"></p>
+            <button class="toggleExplain" onclick="toggleExplain();">Toggle Details !</button>
+            <div hidden id="explainToggle">
+                <div class="explainArea">
+                    <h2><u>Explaination:</u><br></h2>
+                    <p id="seed"></p>
+                    <p id="a"></p>
+                    <p id="c"></p>
+                    <p id="modulus"></p>
+                    <p id="denklem"></p>
+                </div>
             </div>
+            <hr>
+            <br>
+            <input class="tryagain" onclick="window.location.reload();" type="button" value="Try Again">
         </div>
-        <br>
-        <input class="tryagain" onclick="window.location.reload();" type="button" value="Try Again">
     </div>
 
     <script src="test.js"></script>
