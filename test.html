@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<style>
+    input[type=text],
+    select {
+        width: 50%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=number],
+    select {
+        width: 50%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .generate {
+        width: 50%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .tryagain {
+        width: 50%;
+        background-color: rgb(175, 168, 76);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .toggleExplain {
+        width: 10%;
+        background-color: rgb(76, 102, 175);
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .generate:hover {
+        background-color: #45a049;
+    }
+
+    .tryagain:hover {
+        background-color: #e2cf26;
+    }
+</style>
+
+<head>
+
+    <title></title>
+</head>
+
+
+
+
+
+<body>
+    <label for="fname"><b>First name:</b></label><br>
+    <input onclick="startCounting();" type="text" id="fname" name="fname" autocomplete="off"><br><br>
+
+    <label for="number"><b>Generate a number lower than: </b></label><br>
+    <input type="number" id="mod" name="mod" autocomplete="off"><br><br>
+    <input onchange="toggleCounter();" type="checkbox" id="chkCounter" name="chkCounter" value="chkCounter">
+    <label for="chkCounter"> Open the counter &nbsp;&nbsp;&nbsp; </label>
+
+    <span hidden id="timer">0</span><br>
+    <input class="generate" onclick="validate(); clearInterval(interval); generateNumber();" type="button"
+        value="Generate">
+
+
+
+
+    <div hidden id="after">
+        <br>
+        <p id="result"></p>
+        <button class="toggleExplain" onclick="toggleExplain();">Explain</button>
+        <div hidden id="explainToggle">
+            <div style=" background-color: rgb(213, 216, 218);">
+
+                <h2><u>Explaination:</u><br></h2>
+                <p id="seed"></p>
+                <p id="a"></p>
+                <p id="c"></p>
+                <p id="modulus"></p>
+                <p id="denklem"></p>
+            </div>
+        </div>
+        <br>
+        <input class="tryagain" onclick="window.location.reload();" type="button" value="Try Again">
+    </div>
+
+
+
+    <script>
+        var interval;
+        var elapsedTime;
+
+        function toggleExplain() {
+            if (document.getElementById("explainToggle").style.display == 'block') {
+                document.getElementById("explainToggle").style.display = 'none';
+            }
+            else {
+                document.getElementById("explainToggle").style.display = 'block';
+            }
+        }
+
+        function toggleCounter() {
+            if (document.getElementById("chkCounter").checked) {
+                document.getElementById('timer').style.display = 'block';
+            }
+            else {
+                document.getElementById('timer').style.display = 'none';
+            }
+        }
+        function startCounting() {
+
+            var startTime = Date.now();
+
+            interval = setInterval(function () {
+                elapsedTime = Date.now() - startTime;
+                document.getElementById("timer").innerHTML = elapsedTime;
+            });
+        }
+
+        function generateNumber() {
+            document.getElementById('after').style.display = 'block';
+            seed = elapsedTime;
+            // alert("seed: " + seed);
+            mod = document.getElementById('mod').value;
+            // alert("mod: " + mod);
+            number = createRand(elapsedTime);
+            document.getElementById("result").innerHTML = "<h1> Generated number is: " + number + "</h1><hr><br> ";
+
+        }
+
+        function createRand(seed) {
+            var a = seed % 99;
+            var c = (seed * seed) % 99;
+            alert("Calculation compleeted.");
+            result = (a * seed + c) % mod;
+            explain(seed, a, c, mod, result);
+            return result;
+        }
+
+        function validate() {
+            name = document.getElementById('fname').value;
+            mod = document.getElementById('mod').value;
+            if (!name || !mod) {
+                alert("Please Enter Fields");
+                window.location.reload();
+            }
+        }
+        function explain(seed, a, c, mod, result) {
+            document.getElementById("seed").innerHTML = "Seed is : " + seed;
+            document.getElementById("a").innerHTML = "a is : " + a;
+            document.getElementById("c").innerHTML = "c is : " + c;
+            document.getElementById("modulus").innerHTML = "modulus is : " + mod;
+            document.getElementById("denklem").innerHTML = "result is = " + "(" + a + " * " + seed + " + " + c + ")" + " % " + mod + " = " + "<b>" + result + "</b>";
+        }
+    </script>
+</body>
+
+</html>
