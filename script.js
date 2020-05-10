@@ -58,8 +58,8 @@ function generateNumber() {
 }
 
 function createRand(seed) {
-    var a = seed % 99;
-    var c = (seed * seed) % 99;
+    var a = seed % 97;
+    var c = (seed * seed) % 97
     alert("Number is generated!");
     result = (a * seed + c) % mod;
     explain(seed, a, c, mod, result);
@@ -71,6 +71,6 @@ function explain(seed, a, c, mod, result) {
     document.getElementById("seed").innerHTML = "Seed is : " + seed;
     document.getElementById("a").innerHTML = "a is : " + a;
     document.getElementById("c").innerHTML = "c is : " + c;
-    document.getElementById("modulus").innerHTML = "modulus is : " + mod;
+    document.getElementById("modulus").innerHTML = "mod is : " + mod;
     document.getElementById("denklem").innerHTML = "Result = " + "(" + a + " * " + seed + " + " + c + ")" + " % " + mod + " = " + "<b style='color:red'>" + result + "</b>" + "<hr>";
 }
