@@ -60,7 +60,7 @@ function generateNumber() {
 function createRand(seed) {
     var a = seed % 99;
     var c = (seed * seed) % 99;
-    alert("Calculation completed.");
+    alert("Number is generated!");
     result = (a * seed + c) % mod;
     explain(seed, a, c, mod, result);
     return result;
