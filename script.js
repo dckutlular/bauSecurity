@@ -18,21 +18,21 @@ function toggleCounter() {
         document.getElementById('timer').style.display = 'none';
     }
 }
+
 function startCounting() {
     var startTime = Date.now();
-    interval = setInterval(function () {
-        elapsedTime = Date.now() - startTime;
-        document.getElementById("timer").innerHTML = elapsedTime;
-    });
+    if (interval == undefined) {
+        interval = setInterval(function () {
+            elapsedTime = Date.now() - startTime;
+            document.getElementById("timer").innerHTML = elapsedTime;
+        });
+    }
 }
-
 
 function validate() {
     name = document.getElementById('fname').value;
     mod = document.getElementById('mod').value;
     if (!name || !mod) {
-        //alert("Please Enter Fields");
-        //window.location.reload();
         return false
     }
     return true
@@ -58,14 +58,13 @@ function generateNumber() {
 }
 
 function createRand(seed) {
-    var a = seed % 97;
-    var c = (seed * seed) % 97
+    var a = (seed * 1664525) % 7841;
+    var c = (seed * seed + 12345) % 7853
     alert("Number is generated!");
     result = (a * seed + c) % mod;
     explain(seed, a, c, mod, result);
     return result;
 }
-
 
 function explain(seed, a, c, mod, result) {
     document.getElementById("seed").innerHTML = "Seed is : " + seed;
